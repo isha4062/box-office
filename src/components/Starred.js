@@ -4,7 +4,8 @@ import Mainpage from './Mainpage'
 function Starred() {
   return (
     <Mainpage>
-      Starred
+      <input type="text" />
+      <button type='submit'>Search</button>
     </Mainpage>
   )
 }
