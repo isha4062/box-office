@@ -1,11 +1,13 @@
 /* eslint-disable no-console */
 import React , {useState} from 'react';
 import ActorGrid from './actor/ActorGrid';
+import { RadioInputsWrapper, SearchButtonWrapper, SearchInput } from './Home.styled';
 import Mainpage from './Mainpage';
+import { LastQuery } from './misc/custom-hooks';
 import ShowGrid from './show/ShowGrid';
 
 function Home() {
-  const [input, setInput] = useState('');
+  const [input, setInput] = LastQuery();
   const [result , setResult] = useState(null);
   const [search , setSearch] = useState('shows');
 
@@ -35,18 +37,24 @@ function Home() {
   }
   return (
     <Mainpage>
-          <input type="text" onChange={onInputChange} onKeyDown={onEnter} value={input} />
-          <button type="submit" onClick={onSearch}>Search</button>
-          <div>
+          <SearchInput type="text" onChange={onInputChange} onKeyDown={onEnter} value={input} placeholder='Type here to search'/>
+          <RadioInputsWrapper>
+            <div>
             <label htmlFor="shows">
               Shows
               <input type="radio" id='shows' value='shows' onChange={setSearchOption} checked={isChecked}/>
             </label>
+            </div>
+            <div>
             <label htmlFor="shows">
               Actors
               <input type="radio" id='actors' value='people' onChange={setSearchOption} checked={!isChecked}/>
             </label>
-          </div>
+            </div>
+          </RadioInputsWrapper>
+          <SearchButtonWrapper>
+            <button type="submit" onClick={onSearch}>Search</button>            
+          </SearchButtonWrapper>
           {searchResult()}
       </Mainpage>
   );
